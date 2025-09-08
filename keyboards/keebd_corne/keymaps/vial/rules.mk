@@ -10,5 +10,5 @@ MOUSEKEY_ENABLE     = no
 OLED_ENABLE         = yes
 EXTRAKEY_ENABLE     = no
 COMBO_ENABLE        = no
-
+WPM_ENABLE = yes
 QMK_SETTINGS        = no
