@@ -57,13 +57,19 @@ __attribute__((weak)) void oled_render_logo(void) {
 }
 
 bool oled_task_kb(void) {
-    if (!oled_task_user()) {
-        return false;
-    }
-    if (is_keyboard_master()) {
-        draw_bongo();
-    } else {
-        draw_bongo();
+    if(last_input_activity_elapsed() < OLED_TIMEOUT) {
+        // Turn the OLED on and get current layer state
+        oled_on();
+        if (!oled_task_user()) {
+            return false;
+        }
+        if (is_keyboard_master()) {
+            draw_bongo(true);
+        } else {
+            draw_bongo(false);
+        }
+    }else{
+        oled_off();
     }
     return false;
 }
