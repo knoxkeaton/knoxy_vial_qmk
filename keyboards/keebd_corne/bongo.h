@@ -204,7 +204,7 @@ static void draw_bongo(bool show_wpm)
         oled_write(wpm, false);
     }else{
         oled_set_cursor(0, 0);
-        sprintf(wpm, "WPM:%03d", get_current_wpm());
+        sprintf(wpm, "BONGO");
         oled_write(wpm, false);
     }
 }
