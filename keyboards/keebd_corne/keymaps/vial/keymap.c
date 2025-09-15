@@ -98,10 +98,10 @@ void setGameRGB(int n) {
         rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_IDLE);
         break;
         case 2:
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_RAISE);
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_LOWER);
         break;
         case 3:
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_LOWER);
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_RAISE);
     break;
   }
 };
