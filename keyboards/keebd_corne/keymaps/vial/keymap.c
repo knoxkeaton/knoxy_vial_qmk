@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 void keyboard_post_init_user(void) {
-    rgb_matrix_mode(RGB_MATRIX_CUSTOM_LOWER);
+    rgb_matrix_mode(RGB_MATRIX_CUSTOM_IDLE);
 }
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
@@ -95,13 +95,13 @@ void setGameRGB(int n) {
   switch (n) {
     case 1:
         if(!rgbmode) rgbmode = rgb_matrix_config.mode;
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_LOWER);
-    break;
-    case 2:
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_RAISE);
-    break;
-    case 3:
         rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_IDLE);
+        break;
+        case 2:
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_RAISE);
+        break;
+        case 3:
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_LOWER);
     break;
   }
 };

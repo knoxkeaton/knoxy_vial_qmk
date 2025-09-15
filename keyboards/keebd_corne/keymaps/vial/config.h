@@ -43,8 +43,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define RGB_MATRIX_SAT_STEP 92
 #    define RGB_MATRIX_VAL_STEP 94
 #    define RGB_MATRIX_SPD_STEP 20
-//#    define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_COLOR
-// Split keyboard specific
 #    define RGBLED_NUM 54 // Number of LEDs
 #    define DRIVER_LED_TOTAL RGBLED_NUM
 #    define RGB_MATRIX_SPLIT \
