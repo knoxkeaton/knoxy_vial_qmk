@@ -25,6 +25,7 @@ RGB_MATRIX_EFFECT(IDLE)
 int underglow[]             = {0, 1, 2, 3, 4, 5, 27, 28, 29, 30, 31, 32};
 int arrow_keys[]            = {16, 17, 19, 11};
 int numbers[]               = {16, 17, 19, 11, 10, 18, 12, 20, 21, 15};
+int brackets[]               = {8,10,11,16,17,19,22};
 int all_keys[]              = {7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26};
 int layer_keys[]            = {13};
 
@@ -60,18 +61,21 @@ static bool LOWER(effect_params_t* params) {
     } else {
         set_group_color(numbers, ARRAY_SIZE(numbers), COL_RED);
     }
-
+    
     return rgb_matrix_check_finished_leds(led_max);
 }
 
 static bool RAISE(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
     clear_all(led_min, led_max);
-
+    
     set_group_color(underglow, ARRAY_SIZE(underglow), COL_BLUE);
-
-    // Example: enable if wanted
-    // set_group_color(fkeys, ARRAY_SIZE(fkeys), COL_NEON_GRN);
+    
+    if (is_keyboard_master()) {
+        set_group_color(brackets, ARRAY_SIZE(brackets), COL_BLUE);
+    } else {
+        set_group_color(numbers, ARRAY_SIZE(numbers), COL_BLUE);
+    }
 
     return rgb_matrix_check_finished_leds(led_max);
 }
