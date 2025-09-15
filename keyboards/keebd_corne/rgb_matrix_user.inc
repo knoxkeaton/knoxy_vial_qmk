@@ -24,7 +24,6 @@ int media_keys[] = {8, 11, 16, 35, 38, 43, 46};
 int layer_keys[] = {13};
 
 
-
 static bool LOWER(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
@@ -37,7 +36,7 @@ static bool LOWER(effect_params_t* params) {
     //UNDERGLOW LED
     for (uint8_t i = 0; i < 12; i++) {
         RGB_MATRIX_TEST_LED_FLAGS();
-        rgb_matrix_set_color(underglow[i], 0xff, 0x13, 0x13);  //Purple Joker 
+        rgb_matrix_set_color(underglow[i], 0xff, 0x13, 0x13);  //RED
     }
 
     // //NUMBERS
@@ -46,11 +45,11 @@ static bool LOWER(effect_params_t* params) {
     //     rgb_matrix_set_color(numbers[i], 0x6f, 0x13, 0xf0);  //Purple 
     // }
 
-    // //ARROWS
-    // for (uint8_t i = 0; i < sizeof(arrow_keys)/sizeof(arrow_keys[0]); i++) {
-    //     RGB_MATRIX_TEST_LED_FLAGS();
-    //     rgb_matrix_set_color(arrow_keys[i], 0xf0, 0x13, 0xec);  //Pink
-    // }
+    //ARROWS
+    for (uint8_t i = 0; i < sizeof(arrow_keys)/sizeof(arrow_keys[0]); i++) {
+        RGB_MATRIX_TEST_LED_FLAGS();
+        rgb_matrix_set_color(arrow_keys[i], 0xf0, 0x13, 0xec);  //Pink
+    }
 
     return rgb_matrix_check_finished_leds(led_max);
 }
@@ -67,7 +66,7 @@ static bool RAISE(effect_params_t* params) {
     //UNDERGLOW LED
     for (uint8_t i = 0; i < 12; i++) {
         RGB_MATRIX_TEST_LED_FLAGS();
-        rgb_matrix_set_color(underglow[i], 0x00, 0x13, 0xf0);  //Neon Green   
+        rgb_matrix_set_color(underglow[i], 0x00, 0x13, 0xf0);  //Blue   
     }
 
     // //FKEYS
