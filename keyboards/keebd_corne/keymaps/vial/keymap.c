@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+#include "print.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x6_3(
@@ -68,3 +69,61 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   )
 };
+void keyboard_post_init_user(void) {
+    rgb_matrix_mode(RGB_MATRIX_CUSTOM_LOWER);
+}
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+    if (record->event.pressed) {
+        uprintf("Key pressed: %u, Layer: %u\n", keycode, get_highest_layer(layer_state));
+    }
+    return true;
+}
+uint8_t rgbmode;
+static void setGameRGB(int);
+bool rgbStatus = true;
+
+void matrix_scan_user(void) {
+    if(rgb_matrix_config.mode != RGB_MATRIX_CUSTOM_LOWER 
+    && rgb_matrix_config.mode != RGB_MATRIX_CUSTOM_RAISE 
+    && rgb_matrix_config.mode != RGB_MATRIX_CUSTOM_IDLE){
+        rgbmode = rgb_matrix_config.mode;
+    }
+}
+
+void setGameRGB(int n) {
+  switch (n) {
+    case 1:
+        if(!rgbmode) rgbmode = rgb_matrix_config.mode;
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_LOWER);
+    break;
+    case 2:
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_RAISE);
+    break;
+    case 3:
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_IDLE);
+    break;
+  }
+};
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        
+    case 0:
+       setGameRGB(1);
+        break;
+    case 1:
+        setGameRGB(2);
+        break;
+    case 2:
+       setGameRGB(3);
+        break;
+    default: //  for any other layers, or the default layer
+        rgbStatus = rgb_matrix_is_enabled();
+        if(rgbStatus == true){
+            rgb_matrix_mode_noeeprom(rgbmode);
+        }
+        break;
+    }
+  return state;
+}
